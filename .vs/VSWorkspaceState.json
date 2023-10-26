@@ -1,9 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Controllers",
     "\\Views",
-    "\\Views\\Recipes"
+    "\\Views\\Recipes",
+    "\\wwwroot",
+    "\\wwwroot\\lib",
+    "\\wwwroot\\lib\\bootstrap",
+    "\\wwwroot\\lib\\bootstrap\\dist",
+    "\\wwwroot\\lib\\bootstrap\\dist\\js"
   ],
-  "SelectedNode": "\\Program.cs",
+  "SelectedNode": "\\Recipease.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -27,9 +27,9 @@ namespace Recipease.Controllers
                 return Problem("Entity set 'Recipease.Recipe'  is null.");
             }
 
-            IQueryable<string> cuisineQuery = from m in _context.Recipe
-                                            orderby m.Cuisine
-                                            select m.Cuisine;
+            IQueryable<string> cuisineQuery = from r in _context.Recipe
+                                            orderby r.Cuisine
+                                            select r.Cuisine;
 
             var recipes = from r in _context.Recipe
                          select r;
@@ -68,7 +68,7 @@ namespace Recipease.Controllers
             }
 
             var recipe = await _context.Recipe
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(r => r.Id == id);
             if (recipe == null)
             {
                 return NotFound();
@@ -106,6 +106,7 @@ namespace Recipease.Controllers
             {
                 return NotFound();
             }
+            
 
             var recipe = await _context.Recipe.FindAsync(id);
             if (recipe == null)
@@ -118,19 +119,92 @@ namespace Recipease.Controllers
         public async Task<IActionResult> Rate(int? id)
         {
             var rand = new Random();
-            id = rand.Next(3, 6);
-            if (id == null || _context.Recipe == null)
-            {
-                return NotFound();
-            }
+            var rand_id = new int();
 
-            var recipe = await _context.Recipe.FindAsync(id);
+            do
+            {
+                rand_id = _context.Recipe.OrderBy(o => Guid.NewGuid()).First().Id;
+                Console.WriteLine(rand_id);
+            }
+            while (rand_id == id);
+
+
+
+
+            if (rand_id == null || _context.Recipe == null)
+            {
+                
+            }
+            
+
+
+            var recipe = await _context.Recipe
+                .FirstOrDefaultAsync(r => r.Id == rand_id);
+
+            
             if (recipe == null)
             {
                 return NotFound();
             }
+
+
+            if (_context.Recipe == null)
+            {
+                return Problem("Entity set 'Recipease.Recipe'  is null.");
+            }
+
+            var recipes = from r in _context.Recipe
+                          select r;
+
+            
             return View(recipe);
         }
+
+        [HttpPost, ActionName("Good")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Good(int id)
+        {
+
+
+            if (_context.Recipe == null)
+            {
+                return Problem("Entity set 'RecipeaseContext.Recipe'  is null.");
+            }
+            var recipe = await _context.Recipe.FindAsync(id);
+            if (recipe != null)
+            {
+                recipe.Rating = recipe.Rating + 1;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Rate));
+            
+            
+        }
+        [HttpPost, ActionName("Bad")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Bad(int id)
+        {
+
+
+            if (_context.Recipe == null)
+            {
+                return Problem("Entity set 'RecipeaseContext.Recipe'  is null.");
+            }
+            var recipe = await _context.Recipe.FindAsync(id);
+            if (recipe != null)
+            {
+                recipe.Rating = recipe.Rating - 1;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Rate));
+
+
+        }
+        
 
         // POST: Recipes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
