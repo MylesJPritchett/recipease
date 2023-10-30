@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8Np2Ndc9g/J+YZVNA9Sgceyt3gE8GEEbfP3FKjBwyO6Lu9BU7mD9ibZyUQzVH1FWYCDg/9JQ87QobMaSUUfMSw==",
+  "dgSpecHash": "gn04xlLoJLSumHzVebXUzqLFTNBjZwoIryk9+nSmst4hQdlitHbyUorPaF/sMx+G/zBkHtG5ZcNH9X8+uy12qw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Myles\\Documents\\Programming\\Recipease-MVC\\Recipease\\Recipease.csproj",
   "expectedPackageFiles": [
@@ -105,6 +105,7 @@
     "C:\\Users\\Myles\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Myles\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Myles\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\Myles\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
     "C:\\Users\\Myles\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\7.0.9\\microsoft.visualstudio.web.codegeneration.7.0.9.nupkg.sha512",
     "C:\\Users\\Myles\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\7.0.9\\microsoft.visualstudio.web.codegeneration.core.7.0.9.nupkg.sha512",
     "C:\\Users\\Myles\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.design\\7.0.9\\microsoft.visualstudio.web.codegeneration.design.7.0.9.nupkg.sha512",
