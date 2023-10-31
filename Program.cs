@@ -4,11 +4,15 @@ using Recipease.Data;
 using Recipease.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<RecipeaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RecipeaseContext") ?? throw new InvalidOperationException("Connection string 'RecipeaseContext' not found.")));
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
+var connectionString = builder.Configuration.GetConnectionString("RecipeaseContext");
+builder.Services.AddDbContext<RecipeaseContext>(options =>
+{
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
 
 var app = builder.Build();
 

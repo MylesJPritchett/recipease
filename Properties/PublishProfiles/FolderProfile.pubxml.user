@@ -3,4 +3,9 @@
 https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Release\net7.0\publish\</_PublishTargetUrl>
+    <History>True|2023-10-30T03:00:08.6958780Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
 </Project>

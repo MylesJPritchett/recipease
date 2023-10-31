@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Recipease.Data;
 using Recipease.Models;
 
@@ -88,7 +91,7 @@ namespace Recipease.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,DateAdded,Cuisine,Price,Rating")] Recipe recipe)
+        public async Task<IActionResult> Create([Bind("Id,Title,Image,DateAdded,Cuisine,Price,Rating,Summary")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -118,28 +121,56 @@ namespace Recipease.Controllers
 
         public async Task<IActionResult> Rate(int? id)
         {
+
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.spoonacular.com/recipes/random?number=1&apiKey=fd93271a34a24f448d0d2c0973595b0b");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var response_string = (await response.Content.ReadAsStringAsync());
+
+            JObject jo = JObject.Parse(response_string);
+            Recipe_New[] recipeArray = jo.SelectToken("recipes", false).ToObject<Recipe_New[]>();
+
+            //List <Recipe_New> result_list = JsonConvert.DeserializeObject<List<Recipe_New>>(response_string);
+            Recipe_New result = recipeArray[0];
+
+            Recipe r = new Recipe();
+
+            r.Title = result.Title;
+                r.Image = result.Image;
+                r.Rating = 0;
+                r.Summary = result.Summary;
+                r.Id = result.Id;
+                r.Price = (decimal)result.PricePerServing;
+                r.DateAdded = DateTime.Now;
+     
+
+            _context.Add(r);
+            await _context.SaveChangesAsync();
+
+
             var rand = new Random();
+            var total = _context.Recipe.Count();
             var rand_id = new int();
 
             do
             {
-                rand_id = _context.Recipe.OrderBy(o => Guid.NewGuid()).First().Id;
-                Console.WriteLine(rand_id);
+                rand_id = _context.Recipe.Skip(rand.Next(total)).First().Id;
             }
             while (rand_id == id);
 
+            int new_id = result.Id;
 
-
-
-            if (rand_id == null || _context.Recipe == null)
+            if (new_id == null || new_id == 0)
             {
-                
+                new_id = rand_id;
             }
-            
 
 
             var recipe = await _context.Recipe
-                .FirstOrDefaultAsync(r => r.Id == rand_id);
+                .FirstOrDefaultAsync(r => r.Id == new_id);
 
             
             if (recipe == null)
@@ -153,8 +184,7 @@ namespace Recipease.Controllers
                 return Problem("Entity set 'Recipease.Recipe'  is null.");
             }
 
-            var recipes = from r in _context.Recipe
-                          select r;
+      
 
             
             return View(recipe);

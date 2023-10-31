@@ -251,3 +251,7 @@ C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\ru
 C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\Npgsql.dll
+C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\MySqlConnector.dll
+C:\Users\Myles\Documents\Programming\Recipease-MVC\Recipease\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
